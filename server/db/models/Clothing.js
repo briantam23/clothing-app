@@ -12,5 +12,10 @@ const Clothing = conn.define('clothing', {
     }
 })
 
+const syncAndSeed = () => {
+    conn.sync({ force: true })
+        .then(() => Clothing.create({ name: 'foo' }))
+}
 
-module.exports = Clothing;
+
+module.exports = { Clothing, syncAndSeed };

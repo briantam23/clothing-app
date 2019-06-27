@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Clothing = require('../db/models/Clothing');
+const { Clothing } = require('../db/models/Clothing');
 
 
 router.get('/', (req, res, next) => {
@@ -10,6 +10,7 @@ router.get('/', (req, res, next) => {
 })
 
 router.post('/', (req, res, next) => {
+    console.log(req.body)
     Clothing.create(req.body)
         .then(clothing => res.send(clothing))
         .catch(next)

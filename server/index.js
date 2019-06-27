@@ -3,6 +3,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const path = require('path');
 const bodyParser = require('body-parser');
+const { syncAndSeed } = require('./db/models/Clothing');
 
 
 app.use(bodyParser.json());
@@ -20,3 +21,11 @@ app.listen(PORT, () => console.log(`
         http://localhost:3000
     
 `))
+
+app.use((err, req, res, next) => {
+        console.log(err);
+        res.status(err.status || 500).send({ error: err.message });
+})
+
+
+syncAndSeed();
