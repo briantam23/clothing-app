@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { loadClothing } from '../store';
 
 
 class Form extends Component {
@@ -14,9 +16,11 @@ class Form extends Component {
     }
 
     componentDidMount() {
-        return axios.get('/api/clothing')
+        const { loadClothing } = this.props;
+        loadClothing()
+        /* return axios.get('/api/clothing')
             .then(res => res.data)
-            .then(seededClothing => this.setState({ seededClothing }))
+            .then(seededClothing => this.setState({ seededClothing })) */
     }
 
     handleChange(e) {
@@ -49,5 +53,7 @@ class Form extends Component {
     }
 }
 
+const mapDispatchToProps = ({ loadClothing });
 
-export default Form;
+
+export default connect(null, mapDispatchToProps)(Form);
